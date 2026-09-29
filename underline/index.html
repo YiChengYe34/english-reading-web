@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+  网页版的页面模板（只有网页版用，手机 APP 不用）。在 Expo 默认模板上加了两处：
+  1. 手机上铺满屏幕
+  2. 电脑宽屏上显示成居中的一台手机（390 × 844，和设计稿同尺寸）
+-->
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#9EC0C0" />
+    <title>Underline</title>
+    <script>
+      // GitHub Pages 没有服务器路由：直接打开 /underline/vocab 这类网址时，站点根目录的 404.html 会跳回
+      // /underline/?__path=/vocab。这里在 APP 启动前把地址栏改回原来的网址，路由照常按它显示页面。
+      (function () {
+        var q = new URLSearchParams(location.search);
+        var p = q.get('__path');
+        if (!p) return;
+        q.delete('__path');
+        var rest = q.toString();
+        var base = location.pathname.replace(/\/$/, '');
+        history.replaceState(null, '', base + p + (rest ? '?' + rest : '') + location.hash);
+      })();
+    </script>
+    <style id="expo-reset">
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        overflow: hidden;
+        margin: 0;
+        background-color: #1c1c1c;
+        -webkit-tap-highlight-color: transparent;
+      }
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+      /* 电脑上：居中显示一台手机 */
+      @media (min-width: 600px) and (min-height: 700px) {
+        body {
+          background: #e9e5dc;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        #root {
+          flex: none;
+          width: 390px;
+          height: min(844px, calc(100vh - 32px));
+          border-radius: 36px;
+          overflow: hidden;
+          box-shadow: 0 0 0 10px #1c1c1c, 0 30px 80px rgba(28, 28, 28, 0.35);
+          transform: translateZ(0);
+        }
+      }
+      /* 滚动区不显示滚动条（和设计稿一致） */
+      * {
+        scrollbar-width: none;
+      }
+      *::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  <link rel="icon" href="/english-reading-web/underline/favicon.ico"/></head>
+
+  <body>
+    <noscript>需要打开浏览器的 JavaScript 才能使用。</noscript>
+    <div id="root"></div>
+  <script src="/english-reading-web/underline/_expo/static/js/web/entry-f8e4014c1117f4886f6cf25efda7cd8d.js" defer></script>
+</body>
+</html>
